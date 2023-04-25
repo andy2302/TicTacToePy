@@ -11,7 +11,6 @@ class TicTacToeApp(App):
         # Set the window size
         Config.set('graphics', 'width', '1000')
         Config.set('graphics', 'height', '1000')
-        Config.write()
 
         self.title = "Tic-Tac-Toe"
         self.game = TicTacToe()
@@ -43,8 +42,8 @@ class TicTacToeApp(App):
         button.disabled = True
 
     def reset_game(self):
-        self.save_settings()
         self.game = TicTacToe()
+        self.load_settings()  # Add this line to load the settings after re-initializing the game
 
         # Reset UI
         for i in range(9):
