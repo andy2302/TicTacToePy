@@ -53,7 +53,7 @@ class TicTacToeApp(App):
             button.disabled = False
             button.background_normal = 'atlas://data/images/defaulttheme/button'
             button.background_color = [1, 1, 1, 1]
-            button.colors = {"X": [0, 0, 0, 1], "O": [0, 0, 0, 1]}  # Add this line
+            button.colors = {"X": [0, 0, 0, 1], "O": [0, 0, 0, 1]}
 
         status_label = self.root.ids["status_label"]
         status_label.text = "Tic-Tac-Toe"
@@ -61,16 +61,16 @@ class TicTacToeApp(App):
     def apply_settings(self, x_color, o_color, cell_size):
         self.game.x_color = x_color
         self.game.o_color = o_color
-        self.game.cell_size = cell_size
+        self.game.cell_size = int(cell_size)  # Convert the cell_size to an integer
         self.save_settings()
 
         for index, button in enumerate(self.root.ids.grid.children):
             if button.text == "X":
                 button.background_color = x_color
-                button.font_size = cell_size
+                button.font_size = int(cell_size)  # Convert the cell_size to an integer
             elif button.text == "O":
                 button.background_color = o_color
-                button.font_size = cell_size
+                button.font_size = int(cell_size)  # Convert the cell_size to an integer
 
         App.get_running_app().root.current = "main_menu"
 
