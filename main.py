@@ -32,11 +32,16 @@ class TicTacToeApp(App):
             # Disable all buttons
             for i in range(9):
                 self.root.ids[f"cell{i}"].disabled = True
+        else:
+            # Update the status label to show the current player
+            status_label = self.root.ids["status_label"]
+            status_label.text = f"{self.game.current_player}'s turn"
 
         # Update the UI with the move
         button = self.root.ids[f"cell{position}"]
         button.text = self.game.board[position]
         button.background_color = self.game.x_color if self.game.board[position] == "X" else self.game.o_color
+        button.color = self.game.x_color if self.game.board[position] == "X" else self.game.o_color
         button.font_size = self.game.cell_size
         button.background_normal = ""
         button.disabled = True
@@ -55,7 +60,7 @@ class TicTacToeApp(App):
             button.colors = {"X": [0, 0, 0, 1], "O": [0, 0, 0, 1]}
 
         status_label = self.root.ids["status_label"]
-        status_label.text = "Tic-Tac-Toe"
+        status_label.text = f"{self.game.current_player}'s turn"
 
     def apply_settings(self, x_color, o_color, cell_size):
         self.game.x_color = x_color
@@ -98,4 +103,3 @@ class TicTacToeApp(App):
 
 if __name__ == "__main__":
     TicTacToeApp().run()
-
