@@ -2,6 +2,9 @@ class TicTacToe:
     def __init__(self):
         self.board = [" " for _ in range(9)]
         self.current_player = "X"
+        self.x_color = [1, 0, 0, 1]
+        self.o_color = [0, 0, 1, 1]
+        self.cell_size = "max"
 
     def make_move(self, position):
         if self.board[position] == " ":

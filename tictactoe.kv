@@ -1,4 +1,5 @@
 #: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import Factory kivy.factory.Factory
 
 ScreenManager:
     id: screen_manager
@@ -19,6 +20,11 @@ ScreenManager:
                 text: "New Game"
                 font_size: 20
                 on_press: screen_manager.current = "game"
+
+            Button:
+                text: "Settings"
+                font_size: 20
+                on_press: screen_manager.current = "settings"
 
     Screen:
         name: "game"
@@ -74,3 +80,80 @@ ScreenManager:
                 on_press:
                     app.reset_game()
                     screen_manager.current = "main_menu"
+
+    Screen:
+        name: "settings"
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 20
+            padding: [20, 20, 20, 20]
+
+            Label:
+                text: "Settings"
+                font_size: 30
+                size_hint_y: None
+                height: 50
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: 50
+
+                Label:
+                    text: "Player size:"
+                    font_size: 20
+                    size_hint_x: None
+                    width: 150
+
+                Slider:
+                    id: player_size_slider
+                    min: 20
+                    max: 50
+                    value: 40
+                    size_hint_x: 0.8
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: 500
+
+                BoxLayout:
+                    orientation: "vertical"
+                    spacing: 10
+
+                    Label:
+                        text: "Player X color:"
+                        font_size: 20
+                        size_hint_x: None
+                        width: 150
+
+                    ColorPicker:
+                        id: player_x_color_picker
+                        size_hint_x: 0.9
+
+                BoxLayout:
+                    orientation: "vertical"
+                    spacing: 10
+
+                    Label:
+                        text: "Player O color:"
+                        font_size: 20
+                        size_hint_x: None
+                        width: 150
+
+                    ColorPicker:
+                        id: player_o_color_picker
+                        size_hint_x: 0.9
+
+            Button:
+                text: "Save"
+                size_hint_y: None
+                height: 50
+                on_press:
+                    app.apply_settings(player_x_color_picker.color, player_o_color_picker.color, player_size_slider.value)
+                    screen_manager.current = "main_menu"
+
+            Button:
+                text: "Cancel"
+                on_press: screen_manager.current = "main_menu"
