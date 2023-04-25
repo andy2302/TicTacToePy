@@ -1,0 +1,76 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+ScreenManager:
+    id: screen_manager
+    transition: NoTransition()
+
+    Screen:
+        name: "main_menu"
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 10
+
+            Label:
+                text: "Tic-Tac-Toe"
+                font_size: 30
+
+            Button:
+                text: "New Game"
+                font_size: 20
+                on_press: screen_manager.current = "game"
+
+    Screen:
+        name: "game"
+
+        FloatLayout:
+            Label:
+                id: status_label
+                text: "Tic-Tac-Toe"
+                font_size: 30
+                size_hint: 1, 0.2
+                pos_hint: {"top": 1}
+
+            GridLayout:
+                id: grid
+                cols: 3
+                rows: 3
+                spacing: 10
+                size_hint: 1, 0.6
+                pos_hint: {"top": 0.8}
+
+                Button:
+                    id: cell0
+                    on_press: app.make_move(0)
+                Button:
+                    id: cell1
+                    on_press: app.make_move(1)
+                Button:
+                    id: cell2
+                    on_press: app.make_move(2)
+                Button:
+                    id: cell3
+                    on_press: app.make_move(3)
+                Button:
+                    id: cell4
+                    on_press: app.make_move(4)
+                Button:
+                    id: cell5
+                    on_press: app.make_move(5)
+                Button:
+                    id: cell6
+                    on_press: app.make_move(6)
+                Button:
+                    id: cell7
+                    on_press: app.make_move(7)
+                Button:
+                    id: cell8
+                    on_press: app.make_move(8)
+
+            Button:
+                text: "Reset"
+                size_hint: 0.15, 0.15
+                pos_hint: {"x": 0.425, "y": 0.01}
+                on_press:
+                    app.reset_game()
+                    screen_manager.current = "main_menu"
